@@ -4,7 +4,7 @@
 
 ;@Ahk2Exe-SetName explorer7 Config
 ;@Ahk2Exe-SetDescription explorer7 Config
-;@Ahk2Exe-SetFileVersion 1.0.1
+;@Ahk2Exe-SetFileVersion 1.0.2
 ;@Ahk2Exe-SetCompanyName valkalyne
 ;@Ahk2Exe-SetCopyright valkalyne
 ;@Ahk2Exe-SetMainIcon icon.ico
@@ -105,7 +105,7 @@ Conf.MarginY :=6
 Conf.SetFont("s12","Segoe UI",)
 Conf.Add("Text","y11.25 x11.25 c003399", "Configure explorer7 Settings")
 Conf.SetFont("s9","Segoe UI",)
-Conf.Add("Link",,'For a list of what these options do, you can visit the <a href="https://github.com/explorer7-team/source">explorer7 Github repository</a>.`nThese options are located under `nHKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced')
+Conf.Add("Link",,'For a list of what these options do, you can visit the <a href="https://github.com/explorer7-team/source">explorer7 Github repository</a>.`nThese options are located under `nHKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced')
 
 Conf.Add("Text",,"Theme:")
 Conf.Add("Edit","vTheme w477.5",Theme)
@@ -117,9 +117,9 @@ Conf.Add("Checkbox","vEnableImmersive Checked" EnableImmersive,"Enable Immersive
 Conf.Add("Checkbox","vStoreAppsInStart Checked" StoreAppsInStart,"Show UWP Apps in Start")
 Conf.Add("Checkbox","vStoreAppsOnTaskbar Checked" StoreAppsOnTaskbar,"Show UWP Apps on the Taskbar")
 Conf.Add("Text",,"Colorization Options:")
-Conf.Add("DropDownList", "vColorizationOptions Choose" ColorizationOptions+1, [0, 1, 2, 3, 4])
+Conf.Add("DropDownList", "vColorizationOptions Choose" ColorizationOptions+1, ["Aero", "Transparent", "BlurBehind", "Acrylic", "Opaque"])
 Conf.Add("Text","","Acrylic Options:")
-Conf.Add("DropDownList", "vAcrylicColorization Choose" AcrylicColorization+1, [0, 1, 2, 3])
+Conf.Add("DropDownList", "vAcrylicColorization Choose" AcrylicColorization+1, ["DWM-like", "Darker Accent", "Lighter Accent", "Regular Colorization"])
 Conf.Add("Checkbox"," vOverrideAlpha Checked" OverrideAlpha,"Override Alpha")
 Conf.Add("Text",,"Alpha Value:")
 Conf.Add("Edit")
@@ -158,8 +158,8 @@ writeconfig(){
     RegWrite(Conf["EnableImmersive"].value, "REG_DWORD", reg, "EnableImmersive")
     RegWrite(Conf["StoreAppsInStart"].value, "REG_DWORD", reg, "StoreAppsInStart")
     RegWrite(Conf["StoreAppsOnTaskbar"].value, "REG_DWORD", reg, "StoreAppsOnTaskbar")
-    RegWrite(Conf["ColorizationOptions"].text, "REG_DWORD", reg, "ColorizationOptions")
-    RegWrite(Conf["AcrylicColorization"].text, "REG_DWORD", reg, "AcrylicColorization")
+    RegWrite(Conf["ColorizationOptions"].value-1, "REG_DWORD", reg, "ColorizationOptions")
+    RegWrite(Conf["AcrylicColorization"].value-1, "REG_DWORD", reg, "AcrylicColorization")
     RegWrite(Conf["OverrideAlpha"].value, "REG_DWORD", reg, "OverrideAlpha")
     RegWrite(Conf["AlphaValue"].value, "REG_DWORD", reg, "AlphaValue")
     RegWrite(Conf["UseTaskbarPinning"].value, "REG_DWORD", reg, "UseTaskbarPinning")
