@@ -1,2 +1,2 @@
 # ex7config
-dinky little configurator for Explorer7
+dinky little AutoHotkey configurator for [explorer7](https://winclassic.net/thread/2588/explorer7-windows-explorer-10-11). thats all Bye !
